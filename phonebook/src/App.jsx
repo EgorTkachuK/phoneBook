@@ -5,30 +5,39 @@ import Filter from './components/Filter';
 import ContactList from './components/ContactList';
 
 const Container = styled.div`
-width:  100vw;
-height:  100vh;
-background-color: #1c0808ff;
-display: flex;
-flex-direction: column;
-align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #1c0808ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
-const Title = styled.h1`
-color: #fff;
-`;
-const SubTitle = styled.h2`
-color: #fff;
-`;
-
+const Title = styled.h1`color: #fff;`;
+const SubTitle = styled.h2`color: #fff;`;
 
 class App extends Component {
   state = {
-    contacts: [ {id: 'id-1', name: 'Rosie Simpson', number: '4591256'},
-    {id: 'id-2', name: 'Hermione Kline', number: '4438912'},
-    {id: 'id-3', name: 'Eden Clements', number: '6451779'},
-    {id: 'id-4', name: 'Annie Copeland', number: '2279126'},],  
-    filter: ''      
+    contacts: [],
+    filter: ''
   };
 
+
+  componentDidMount() {
+    const savedContacts = localStorage.getItem('phonebook_contacts');
+    if (savedContacts) {
+      this.setState({ contacts: JSON.parse(savedContacts) });
+    }
+  }
+
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem(
+        'phonebook_contacts',
+        JSON.stringify(this.state.contacts)
+      );
+    }
+  }
 
   addContact = ({ name, number }) => {
     if (this.isDuplicate(name)) {
@@ -47,18 +56,15 @@ class App extends Component {
     }));
   };
 
-
   isDuplicate(name) {
     return this.state.contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
   }
 
-
   handleFilterChange = event => {
     this.setState({ filter: event.target.value });
   };
-
 
   deleteContact = id => {
     this.setState(({ contacts }) => ({
