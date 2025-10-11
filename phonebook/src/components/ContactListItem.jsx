@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const DelteButton = styled.button`
@@ -11,10 +11,8 @@ padding-left: 20px;
 font-size: 16px;
 font-style: italic;
 margin-left: 20px;
-
-border : 5px solid #FF0000;
- cursor: pointer;
-
+border: 5px solid #FF0000;
+cursor: pointer;
 `;
 const Item = styled.li`
 color: #fff;
@@ -23,16 +21,28 @@ font-style: italic;
 font-weight: bold;
 margin-right: 20px;
 `;
-class ContactListItem extends Component {
-  render() {
-    const { id, name, number, onDelete } = this.props;
-    return (
-      <Item>
-        {name}: {number}
-        <DelteButton onClick={() => onDelete(id)}>Delete</DelteButton>
-      </Item>
-    );
-  }
+
+//  HOOKS
+function ContactListItem({ id, name, number, onDelete }) {
+  return (
+    <Item>
+      {name}: {number}
+      <DelteButton onClick={() => onDelete(id)}>Delete</DelteButton>
+    </Item>
+  );
 }
+
+// CLASS 
+// class ContactListItem extends React.Component {
+//   render() {
+//     const { id, name, number, onDelete } = this.props;
+//     return (
+//       <Item>
+//         {name}: {number}
+//         <DelteButton onClick={() => onDelete(id)}>Delete</DelteButton>
+//       </Item>
+//     );
+//   }
+// }
 
 export default ContactListItem;

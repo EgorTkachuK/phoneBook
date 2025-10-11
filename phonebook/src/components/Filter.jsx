@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 const Input = styled.input`
 color: #000;
@@ -10,7 +10,6 @@ padding-left: 20px;
 font-size: 16px;
 font-style: italic;
 margin-left: 20px;
-
 border : 5px solid yellow;
 `;
 const Label = styled.label`
@@ -21,20 +20,36 @@ font-weight: bold;
 margin-right: 20px;
 `;
 
-class Filter extends Component {
-  render() {
-    return (
-      <Label>
-        Find contacts by name
-        <Input
-          type="text"
-          name="filter"
-          value={this.props.value}
-          onChange={this.props.onChange}
-        />
-      </Label>
-    );
-  }
+// HOOKS
+function Filter({ value, onChange }) {
+  return (
+    <Label>
+      Find contacts by name
+      <Input
+        type="text"
+        name="filter"
+        value={value}
+        onChange={onChange}
+      />
+    </Label>
+  );
 }
+
+//  CLASS 
+// class Filter extends React.Component {
+//   render() {
+//     return (
+//       <Label>
+//         Find contacts by name
+//         <Input
+//           type="text"
+//           name="filter"
+//           value={this.props.value}
+//           onChange={this.props.onChange}
+//         />
+//       </Label>
+//     );
+//   }
+// }
 
 export default Filter;
