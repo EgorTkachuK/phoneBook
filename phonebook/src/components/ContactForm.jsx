@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../redux/actions.js';
 
 const SubmitButton = styled.button`
 background-color: #fff;
@@ -34,7 +36,8 @@ margin-right: 20px;
 `;
 
 //  HOOKS 
-function ContactForm({ onSubmit }) {
+function ContactForm({ isDuplicate }) {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -50,7 +53,16 @@ function ContactForm({ onSubmit }) {
       e.target.reportValidity();
       return;
     }
-    onSubmit({ name, number });
+    if (isDuplicate(name)) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+    const newContact = {
+      id: Date.now().toString(),
+      name,
+      number
+    };
+    dispatch(addContact(newContact));
     setName('');
     setNumber('');
   };

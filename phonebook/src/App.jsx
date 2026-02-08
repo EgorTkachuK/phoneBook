@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import ContactForm from './components/ContactForm';
-import Filter from './components/Filter';
-import ContactList from './components/ContactList';
+import { useSelector, useDispatch } from 'react-redux';
+import ContactForm from './components/ContactForm.jsx';
+import Filter from './components/Filter.jsx';
+import ContactList from './components/ContactList.jsx';
+import { deleteContact } from './redux/actions.js';
 
 const Container = styled.div`
   width: 100vw;
@@ -17,40 +19,16 @@ const SubTitle = styled.h2`color: #fff;`;
 
 // HOOK 
 function App() {
-  const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    const savedContacts = localStorage.getItem('phonebook_contacts');
-    if (savedContacts) {
-      setContacts(JSON.parse(savedContacts));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('phonebook_contacts', JSON.stringify(contacts));
-  }, [contacts]);
-
-  const addContact = ({ name, number }) => {
-    if (isDuplicate(name)) {
-      alert(`${name} is already in contacts`);
-      return;
-    }
-    const newContact = {
-      id: Date.now().toString(),
-      name,
-      number
-    };
-    setContacts(prev => [...prev, newContact]);
-  };
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
 
   const isDuplicate = name =>
     contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase());
 
-  const handleFilterChange = event => setFilter(event.target.value);
-
-  const deleteContact = id =>
-    setContacts(prev => prev.filter(contact => contact.id !== id));
+  const handleDeleteContact = id => {
+    dispatch(deleteContact(id));
+  };
 
   const getVisibleContacts = () => {
     const normFilter = filter.toLowerCase();
@@ -64,10 +42,10 @@ function App() {
   return (
     <Container>
       <Title>Phonebook</Title>
-      <ContactForm onSubmit={addContact} />
+      <ContactForm isDuplicate={isDuplicate} />
       <SubTitle>Contacts</SubTitle>
-      <Filter value={filter} onChange={handleFilterChange} />
-      <ContactList contacts={visibleContacts} onDelete={deleteContact} />
+      <Filter />
+      <ContactList contacts={visibleContacts} onDelete={handleDeleteContact} />
     </Container>
   );
 }

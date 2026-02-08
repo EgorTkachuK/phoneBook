@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ContactListItem from './ContactListItem';
+import ContactListItem from './ContactListItem.jsx';
 
 const List = styled.ul`
 list-style: none;

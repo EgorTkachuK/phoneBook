@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFilter } from '../redux/actions.js';
 const Input = styled.input`
 color: #000;
 width:  200px;
@@ -21,7 +23,14 @@ margin-right: 20px;
 `;
 
 // HOOKS
-function Filter({ value, onChange }) {
+function Filter() {
+  const dispatch = useDispatch();
+  const value = useSelector(state => state.filter);
+
+  const handleChange = event => {
+    dispatch(setFilter(event.target.value));
+  };
+
   return (
     <Label>
       Find contacts by name
@@ -29,7 +38,7 @@ function Filter({ value, onChange }) {
         type="text"
         name="filter"
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
       />
     </Label>
   );
