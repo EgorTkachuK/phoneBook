@@ -1,3 +1,6 @@
+/*
+
+
 import { SET_FILTER } from '../actions.js';
 
 const initialState = '';
@@ -10,3 +13,16 @@ export default function filterReducer(state = initialState, action) {
       return state;
   }
 }
+
+*/
+
+
+import { createReducer } from '@reduxjs/toolkit';
+
+const initialState = '';
+
+const filterReducer = createReducer(initialState, {
+  SET_FILTER: (state, action) => action.payload
+});
+
+export default filterReducer;
