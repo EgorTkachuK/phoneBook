@@ -18,11 +18,12 @@ export default function filterReducer(state = initialState, action) {
 
 
 import { createReducer } from '@reduxjs/toolkit';
+import { setFilter } from '../actions.js';
 
 const initialState = '';
 
-const filterReducer = createReducer(initialState, {
-  SET_FILTER: (state, action) => action.payload
+const filterReducer = createReducer(initialState, (builder) => {
+  builder.addCase(setFilter, (state, action) => action.payload);
 });
 
 export default filterReducer;

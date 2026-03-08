@@ -11,7 +11,7 @@ export default store;
 
 */
 
-// Redux Toolkit store (configureStore) - plain usage without slices
+
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './reducers/rootReducer.js';
 

@@ -20,16 +20,18 @@ export default function contactsReducer(state = initialState, action) {
 
 
 import { createReducer } from '@reduxjs/toolkit';
+import { addContact, deleteContact } from '../actions.js';
 
 const initialState = [];
 
-const contactsReducer = createReducer(initialState, {
-  ADD_CONTACT: (state, action) => {
-    state.push(action.payload);
-  },
-  DELETE_CONTACT: (state, action) => {
-    return state.filter(c => c.id !== action.payload);
-  }
+const contactsReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(addContact, (state, action) => {
+      state.push(action.payload);
+    })
+    .addCase(deleteContact, (state, action) => {
+      return state.filter(c => c.id !== action.payload);
+    });
 });
 
 export default contactsReducer;
