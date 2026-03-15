@@ -13,8 +13,17 @@ export const setFilter = value => ({ type: SET_FILTER, payload: value });
 */
 
 
+/*
+
 import { createAction } from '@reduxjs/toolkit';
 
 export const addContact = createAction('ADD_CONTACT');
 export const deleteContact = createAction('DELETE_CONTACT');
 export const setFilter = createAction('SET_FILTER');
+
+*/
+
+import { addContact, deleteContact } from './reducers/contactsReducer.js';
+import { setFilter } from './reducers/filterReducer.js';
+
+export { addContact, deleteContact, setFilter };
