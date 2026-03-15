@@ -1,5 +1,5 @@
 /*
-
+redux
 
 import { ADD_CONTACT, DELETE_CONTACT } from '../actions.js';
 
@@ -20,6 +20,7 @@ export default function contactsReducer(state = initialState, action) {
 
 
 /*
+redux toolkit 
 
 import { createReducer } from '@reduxjs/toolkit';
 import { addContact, deleteContact } from '../actions.js';
@@ -40,6 +41,8 @@ export default contactsReducer;
 
 */
 
+
+// redux toolkitS
 import { createSlice } from '@reduxjs/toolkit';
 
 const contactsSlice = createSlice({

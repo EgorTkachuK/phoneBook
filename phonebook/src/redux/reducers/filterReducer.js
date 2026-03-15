@@ -1,5 +1,5 @@
 /*
-
+redux
 
 import { SET_FILTER } from '../actions.js';
 
@@ -19,6 +19,8 @@ export default function filterReducer(state = initialState, action) {
 
 /*
 
+redux toolkit
+
 import { createReducer } from '@reduxjs/toolkit';
 import { setFilter } from '../actions.js';
 
@@ -31,6 +33,8 @@ const filterReducer = createReducer(initialState, (builder) => {
 export default filterReducer;
 
 */
+
+// redux toolkitS
 
 import { createSlice } from '@reduxjs/toolkit';
 
